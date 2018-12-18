@@ -1,0 +1,39 @@
+{
+  "name": "www",
+  "version": 2,
+  "alias": "www",
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@now/next",
+      "config": {
+        "useBuildUtils": "@now/build-utils@canary",
+        "maxLambdaSize": "50mb"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/_next/(.*)",
+      "headers": {"cache-control": "max-age=31536000"},
+      "dest": "/_next/$1"
+    },
+    {
+      "src": "/(.*)",
+      "headers": {"cache-control": "max-age=600"},
+      "dest": "/$1"
+    }
+  ],
+  "build": {
+    "env": {
+      "GOOGLE_CLIENT_ID": "@google_client_id",
+      "API_HOST": "api.ihs.edu.vn",
+      "WEB_HOST": "web.ihs.edu.vn",
+      "MOBILE_HOST": "m.ihs.edu.vn",
+      "GRAPHQL_HOST": "edu-1.herokuapp.com/v1alpha1/graphql"
+    }
+  },
+  "env": {
+    "WWW_DASHBOARD_PREFIX": ""
+  }
+}

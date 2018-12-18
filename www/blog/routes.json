@@ -1,0 +1,12 @@
+{
+  "routes": [
+    {
+      "src": "/first-page",
+      "dest": "/blog/hello-world"
+    },
+    {
+      "src": "/news",
+      "dest": "/blog/archives"
+    }
+  ]
+}

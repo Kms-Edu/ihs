@@ -1,0 +1,25 @@
+{
+  "name": "api",
+  "version": 2,
+  "alias": "api",
+  "builds": [
+    {
+      "src": "handlers/**/*.js",
+      "use": "@now/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "headers": {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Headers": "*"
+      },                      
+      "dest": "/handlers/$1/index.js"
+    }
+  ],
+  "env": {
+    "AUTH_HOST": "@auth_host",
+    "JWT_SECRET": "@jwt_secret"
+  }
+}

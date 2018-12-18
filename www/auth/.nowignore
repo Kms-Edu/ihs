@@ -1,0 +1,6 @@
+gotenberg
+node_modules
+package-lock.json
+*.md
+auth
+pdf

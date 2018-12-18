@@ -1,0 +1,31 @@
+{
+  "name": "kms-reducer",
+  "version": "1.0.0",
+  "description": "Describe kms-reducer here",
+  "main": "lib/index.js",
+  "module": "es/index.js",
+  "files": [
+    "es",
+    "lib",
+    "umd"
+  ],
+  "scripts": {
+    "build": "nwb build-web-module",
+    "clean": "nwb clean-module",
+    "prepublishOnly": "npm run build",
+    "test": "nwb test",
+    "test:coverage": "nwb test --coverage",
+    "test:watch": "nwb test --server"
+  },
+  "dependencies": {
+    "axios": "^0.18.0",
+    "easy-peasy": "^1.7.0"
+  },
+  "devDependencies": {
+    "nwb": "0.23.x"
+  },
+  "author": "",
+  "homepage": "",
+  "license": "MIT",
+  "repository": ""
+}

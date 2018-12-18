@@ -1,0 +1,79 @@
+{
+  "version": 2,
+  "name": "kms-mobile",
+  "alias": "m.ihs.edu.vn",
+  "builds": [
+    {
+      "src": "home/next.config.js",
+      "use": "@now/next"
+    },
+    {
+      "src": "/static/*",
+      "use": "@now/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/favicon.ico",
+      "dest": "/home/static/favicon.ico"
+    },
+    {
+      "src": "/robots.txt",
+      "dest": "/static/robots.txt"
+    },
+    {
+      "src": "/static/logo.png",
+      "headers": {
+        "cache-control": "max-age=31536000"
+      },
+      "dest": "/static/logo.png"
+    },
+    {
+      "src": "/home/_next/(.*)",
+      "headers": {
+        "cache-control": "max-age=31536000"
+      },
+      "dest": "/home/_next/$1"
+    },
+    {
+      "src": "/",
+      "headers": {
+        "cache-control": "max-age=600"
+      },
+      "dest": "/home/index"
+    },
+    {
+      "src": "/about",
+      "headers": {
+        "cache-control": "max-age=600"
+      },
+      "dest": "/home/about"
+    },
+    {
+      "src": "/home/service-worker.js",
+      "dest": "/home/_next/static/service-worker.js",
+      "headers": {
+        "cache-control": "public, max-age=43200, immutable",
+        "Service-Worker-Allowed": "/"
+      }
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/home/$1",
+      "headers": {
+        "cache-control": "public, max-age=43200, immutable",
+        "Service-Worker-Allowed": "/"
+      }
+    }
+  ],
+  "build": {
+    "env": {
+      "API_HOST": "https://api.ihs.edu.vn",
+      "GOOGLE_CLIENT_ID": "@google_client_id",
+      "MOBILE_HOME_PREFIX": "/home"
+    }
+  },
+  "env": {
+    "MOBILE_HOME_PREFIX": "/home"
+  }
+}

@@ -1,0 +1,124 @@
+{
+  "version": 2,
+  "name": "kms-web",
+  "alias": "web.ihs.edu.vn",
+  "builds": [
+    {
+      "src": "auth/handlers/**/*.js",
+      "use": "@now/node"
+    },
+    {
+      "src": "home/package.json",
+      "use": "@now/next",
+      "config": {
+        "useBuildUtils": "@now/build-utils@canary",
+        "maxLambdaSize": "50mb"
+      }
+    },
+    {
+      "src": "blog/next.config.js",
+      "use": "@now/next"
+    },
+    {
+      "src": "dashboard/next.config.js",
+      "use": "@now/next"
+    },
+    {
+      "src": "static/*",
+      "use": "@now/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/auth/handlers/$1/index.js"
+    },
+    {
+      "src": "/favicon.ico",
+      "dest": "/static/favicon.ico"
+    },
+    {
+      "src": "/robots.txt",
+      "dest": "/static/robots.txt"
+    },
+    {
+      "src": "/static/logo.png",
+      "headers": {
+        "cache-control": "max-age=31536000"
+      },
+      "dest": "/static/logo.png"
+    },
+    {
+      "src": "/home/_next/(.*)",
+      "headers": {
+        "cache-control": "max-age=31536000"
+      },
+      "dest": "/home/_next/$1"
+    },
+    {
+      "src": "/blog/_next/(.*)",
+      "headers": {
+        "cache-control": "max-age=31536000"
+      },
+      "dest": "/blog/_next/$1"
+    },
+    {
+      "src": "/dashboard/_next/(.*)",
+      "headers": {
+        "cache-control": "max-age=31536000"
+      },
+      "dest": "/dashboard/_next/$1"
+    },
+    {
+      "src": "/",
+      "headers": {
+        "cache-control": "max-age=600"
+      },
+      "dest": "/home/index"
+    },
+    {
+      "src": "/about",
+      "headers": {
+        "cache-control": "max-age=600"
+      },
+      "dest": "/home/about"
+    },
+    {
+      "src": "/dashboard",
+      "headers": {
+        "cache-control": "max-age=600"
+      },
+      "dest": "/dashboard/index"
+    },
+    {
+      "src": "/hello-world",
+      "headers": {
+        "cache-control": "max-age=600"
+      },
+      "dest": "/blog/hello-world"
+    },
+    {
+      "src": "/archives",
+      "headers": {
+        "cache-control": "max-age=600"
+      },
+      "dest": "/blog/archives"
+    }
+  ],
+  "build": {
+    "env": {
+      "GOOGLE_CLIENT_ID": "@google_client_id",
+      "API_HOST": "api.ihs.edu.vn",
+      "WEB_HOST": "web.ihs.edu.vn",
+      "MOBILE_HOST": "m.ihs.edu.vn",
+      "GRAPHQL_HOST": "edu-1.herokuapp.com/v1alpha1/graphql"
+    }
+  },
+  "env": {
+    "WWW_HOME_PREFIX": "/home",
+    "WWW_BLOG_PREFIX": "/blog",
+    "WWW_DASHBOARD_PREFIX": "/dashboard",
+    "GRAPHQL_HOST": "edu-1.herokuapp.com/v1alpha1/graphql",
+    "JWT_SECRET": "@jwt_secret"
+  }
+}
